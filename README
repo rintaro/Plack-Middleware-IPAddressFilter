@@ -1,27 +1,43 @@
-This is Perl module Plack::Middleware::IPAddressFilter.
+NAME
+    Plack::Middleware::IPAddressFilter - Simple IP address access control
+    middleware
 
-INSTALLATION
+SYNOPSIS
+      use Plack::Builder;
+      my $app = sub { ... };
+  
+      builder {
+        enable "IPAddressFilter", rules [
+                                           # deny from all for default.
+          '+ 127.0.0.1',                   # allow from localhost.
+          '+ 192.168.0.0/24',              # allow from LAN
+          '- 192.168.0.5-192.168.0.10',    #   except from some hosts.
+          '+ 192.0.34.72/255.255.255.240', # allow from subnet.
+        ];
+        $app;
+      }
 
-Plack::Middleware::IPAddressFilter installation is straightforward. If your CPAN shell is set up,
-you should just be able to do
+DESCRIPTION
+    Plack::Middleware::IPAddressFilter is a IP address based access control
+    handler for Plack.
 
-    % cpan Plack::Middleware::IPAddressFilter
+CONFIGURATION
+    rules
+        IP address ranges to allow/deny. '-' prepended ranges are denied,'+'
+        prepended or prepend less are allowd.
 
-Download it, unpack it, then build it as per the usual:
+AUTHOR
+    Rintaro Ishizaki <rintaro@cpan.org>
 
-    % perl Makefile.PL
-    % make && make test
+SEE ALSO
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 
-Then install it:
+POD ERRORS
+    Hey! The above document had some coding errors, which are explained
+    below:
 
-    % make install
+    Around line 89:
+        You forgot a '=back' before '=head1'
 
-DOCUMENTATION
-
-Plack::Middleware::IPAddressFilter documentation is available as in POD. So you can do:
-
-    % perldoc Plack::Middleware::IPAddressFilter
-
-to read the documentation online with your favorite pager.
-
-Rintaro Ishizaki
