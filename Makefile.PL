@@ -4,7 +4,8 @@ all_from 'lib/Plack/Middleware/IPAddressFilter.pm';
 readme_from 'lib/Plack/Middleware/IPAddressFilter.pm';
 githubmeta;
 
-# requires '';
+requires 'Plack';
+requires 'Net::IP::AddrRanges';
 
 tests 't/*.t';
 author_tests 'xt';
