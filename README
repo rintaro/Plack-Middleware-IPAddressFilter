@@ -7,7 +7,7 @@ SYNOPSIS
       my $app = sub { ... };
   
       builder {
-        enable "IPAddressFilter", rules [
+        enable "IPAddressFilter", rules => [
                                            # deny from all for default.
           '+ 127.0.0.1',                   # allow from localhost.
           '+ 192.168.0.0/24',              # allow from LAN
